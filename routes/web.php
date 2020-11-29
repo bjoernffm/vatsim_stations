@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function (Request $request) {
+Route::get('/online', function (Request $request) {
     $stations = $request->input('stations');
     $show_offline_stations = $request->input('show_offline_stations', 'true');
 
