@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>VATSIM</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -24,13 +24,10 @@
                     <ul class="list-group list-group-flush">
                         <template v-for="station in stations" :key="station">
                             <li class="list-group-item" v-if="station.online == true || show_offline_stations == true">
-                                <div class="row">
+                                <div class="row" v-if="station.online == true">
                                     <div class="col-auto">
-                                        <svg v-if="station.online == true" xmlns="http://www.w3.org/2000/svg" width="20" height="40">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="40">
                                             <circle cx="10" cy="23" r="10" fill="#28a745" />
-                                        </svg>
-                                        <svg v-if="station.online == false" xmlns="http://www.w3.org/2000/svg" width="20" height="40">
-                                            <circle cx="10" cy="23" r="10" fill="#dc3545" />
                                         </svg>
                                     </div>
                                     <div class="col">
@@ -40,7 +37,21 @@
                                         </div>
                                         <small>@{{station.controller}}</small>
                                     </div>
-                                </div>            
+                                </div>
+                                <div class="row" v-if="station.online == false">
+                                    <div class="col-auto">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="40">
+                                            <circle cx="10" cy="23" r="10" fill="#dc3545" />
+                                        </svg>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col text-muted">@{{station.callsign}}</div>
+                                            <div class="col text-right text-monospace"></div>
+                                        </div>
+                                        <small class="text-muted">N/A</small>
+                                    </div>
+                                </div>         
                             </li>
                         </template>
                     </ul>          
@@ -76,8 +87,8 @@
                                         return {
                                             callsign: item,
                                             online: false,
-                                            frequency: "",
-                                            controller: 'N/A'
+                                            frequency: null,
+                                            controller: null
                                         }
                                     }
 
