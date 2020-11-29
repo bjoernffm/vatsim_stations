@@ -19,9 +19,9 @@ Route::get('/online', function (Request $request) {
     $show_offline_stations = $request->input('show_offline_stations', 'true');
 
     if ($show_offline_stations == 'true') {
-        $show_offline_stations = true;
+        $show_offline_stations = 'true';
     } else {
-        $show_offline_stations = false;
+        $show_offline_stations = 'false';
     }
 
     if($stations == null or $stations == '') {
